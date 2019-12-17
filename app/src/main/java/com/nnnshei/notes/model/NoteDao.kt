@@ -8,7 +8,7 @@ interface NoteDao {
     fun getAll(): List<Note>
 
     @Query("SELECT * FROM note WHERE id = :noteId")
-    fun  loadById(noteId: Int): Note
+    fun loadById(noteId: Int): Note
 
     @Insert
     fun insert(note: Note)
