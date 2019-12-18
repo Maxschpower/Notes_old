@@ -12,29 +12,28 @@
         android:layout_marginTop="8dp"
         android:background="#80000000"
         app:layout_constraintBottom_toTopOf="@id/dataNote"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-48dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/dataNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00:00 \n 01.01.1999"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/itemNote"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="00:00:00 \n 01.01.1999" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/itemNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:text="Jopa Jepa Jopa Jepa Jopa Jepa Jopa"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dataNote" />
+        app:layout_constraintTop_toBottomOf="@+id/dataNote"
+        tools:text="Jopa Jepa Jopa Jepa Jopa Jepa Jopa" />
 
     <View
         android:layout_width="match_parent"
@@ -43,7 +42,6 @@
         android:background="#80000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/itemNote"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="-48dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
