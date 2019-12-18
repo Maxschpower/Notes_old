@@ -20,8 +20,10 @@ class MainActivity : BaseActivity(), MainView {
     override fun init() {
         makeToast("Jopa")
         btnNew.setOnClickListener {
-            presenter.onCreateNoteClicked()
+            presenter.onCreateNoteClicked("asd")
 //            startActivity(Intent(this, NoteActivity::class.java))
         }
     }
+
+
 }
