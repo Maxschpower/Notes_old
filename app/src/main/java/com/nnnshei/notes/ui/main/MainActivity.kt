@@ -8,19 +8,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class MainActivity: BaseActivity(), MainView {
+class MainActivity : BaseActivity(), MainView {
     override val layout = R.layout.activity_main
 
     @InjectPresenter
     lateinit var presenter: MainPresenter
 
     @ProvidePresenter
-    fun providePresenter() = MainPresenter((NoteApplication.getDatabase().noteDao()))
+    fun providePresenter() = MainPresenter(NoteApplication.getDatabase().noteDao())
 
     override fun init() {
         makeToast("Jopa")
-        btnEnter.setOnClickListener {
-
+        btnNew.setOnClickListener {
+            presenter.onCreateNoteClicked()
+//            startActivity(Intent(this, NoteActivity::class.java))
         }
     }
 }
