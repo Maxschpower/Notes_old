@@ -33,15 +33,4 @@ class MainPresenter(private val dao: NoteDao) : BasePresenter<MainView>() {
             })
             .untilDestroy()
     }
-
-    fun onLoadNoteClicked(id: Int) {
-        dao.loadById(id)
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                viewState.onNoteLoad()
-            }, {
-                it.printStackTrace()
-            })
-            .untilDestroy()
-    }
 }

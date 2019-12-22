@@ -8,6 +8,6 @@ import moxy.viewstate.strategy.StateStrategyType
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView : MvpView {
     fun onNoteCreated()
-    fun onNoteLoad()
+    fun onNoteLoad(id: Int)
     fun loadData(data: List<Note>)
 }

@@ -1,6 +1,9 @@
 package com.nnnshei.notes.model
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 import io.reactivex.Single
 
 @Dao
@@ -14,9 +17,12 @@ interface NoteDao {
     @Insert
     fun insert(note: Note): Single<Unit>
 
-    @Query ("DELETE FROM note WHERE id=:noteId")
-    fun delete(noteId: Int)
+    @Query("DELETE FROM note WHERE id=:noteId")
+    fun delete(noteId: Int): Single<Unit>
 
     @Update
     fun update(note: Note): Single<Unit>
+
+    @Query("SELECT * FROM note ORDER BY id DESC LIMIT 1")
+    fun getLastNote(): Single<Note>
 }

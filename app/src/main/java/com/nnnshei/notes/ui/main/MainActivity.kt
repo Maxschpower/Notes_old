@@ -1,6 +1,7 @@
 package com.nnnshei.notes.ui.main
 
 import android.content.Intent
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nnnshei.notes.NoteApplication
 import com.nnnshei.notes.R
 import com.nnnshei.notes.model.Note
@@ -23,25 +24,31 @@ class MainActivity : BaseActivity(), MainView {
     fun providePresenter() = MainPresenter(NoteApplication.getDatabase().noteDao())
 
     private val adapter = NoteAdapter {
-        presenter.onLoadNoteClicked(it.id)
+        onNoteLoad(it.id)
     }
 
     override fun init() {
+        rec.layoutManager = LinearLayoutManager(this)
+        rec.adapter = adapter
+
         makeToast("MainActivity")
         btnNew.setOnClickListener {
             presenter.onCreateNoteClicked()
         }
         btnLoad.setOnClickListener {
-            presenter.onLoadNoteClicked(noteFind.text.toString().toInt())
+            onNoteLoad(noteFind.text.toString().toInt())
         }
     }
 
     override fun onNoteCreated() {
-        startActivity(Intent(this, NoteActivity::class.java))
+        val intent = Intent(this, NoteActivity::class.java)
+        startActivity(intent)
     }
 
-    override fun onNoteLoad() {
-        startActivity(Intent(this, NoteActivity::class.java))
+    override fun onNoteLoad(id: Int) {
+        val intent = Intent(this, NoteActivity::class.java)
+        intent.putExtra(NoteActivity.INTENT_NOTE_KEY, id)
+        startActivity(intent)
     }
 
     override fun loadData(data: List<Note>) {
