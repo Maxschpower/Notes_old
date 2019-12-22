@@ -14,9 +14,9 @@ interface NoteDao {
     @Insert
     fun insert(note: Note): Single<Unit>
 
-    @Delete
-    fun delete(note: Note)
+    @Query ("DELETE FROM note WHERE id=:noteId")
+    fun delete(noteId: Int)
 
     @Update
-    fun update(note: Note)
+    fun update(note: Note): Single<Unit>
 }

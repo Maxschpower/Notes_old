@@ -1,12 +1,11 @@
-package com.nnnshei.notes.ui.main
+package com.nnnshei.notes.ui.note
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
-import moxy.viewstate.strategy.AddToEndStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface MainView : MvpView {
-    fun onNoteCreated()
-    fun onNoteLoad()
+interface NoteView: MvpView {
+    fun onNoteDelete()
+    fun onNoteSave()
 }
