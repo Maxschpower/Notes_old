@@ -4,11 +4,24 @@ import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.model.NoteDao
 import com.nnnshei.notes.presenter.BasePresenter
 import com.nnnshei.notes.ui.main.MainView
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import moxy.InjectViewState
 
 @InjectViewState
 class MainPresenter(private val dao: NoteDao) : BasePresenter<MainView>() {
+
+    init {
+        dao.getAll()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                viewState.loadData(it)
+            }, {
+                it.printStackTrace()
+            })
+            .untilDestroy()
+    }
 
     fun onCreateNoteClicked() {
         dao.insert(Note(0, null, System.currentTimeMillis()))
@@ -25,7 +38,7 @@ class MainPresenter(private val dao: NoteDao) : BasePresenter<MainView>() {
         dao.loadById(id)
             .subscribeOn(Schedulers.io())
             .subscribe({
-               viewState.onNoteLoad()
+                viewState.onNoteLoad()
             }, {
                 it.printStackTrace()
             })

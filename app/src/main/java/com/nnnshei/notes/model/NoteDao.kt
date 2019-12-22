@@ -6,7 +6,7 @@ import io.reactivex.Single
 @Dao
 interface NoteDao {
     @Query("SELECT * FROM note")
-    fun getAll(): List<Note>
+    fun getAll(): Single<List<Note>>
 
     @Query("SELECT * FROM note WHERE id = :noteId")
     fun loadById(noteId: Int): Single<Note>

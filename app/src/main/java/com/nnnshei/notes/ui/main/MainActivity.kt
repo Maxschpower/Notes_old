@@ -3,15 +3,17 @@ package com.nnnshei.notes.ui.main
 import android.content.Intent
 import com.nnnshei.notes.NoteApplication
 import com.nnnshei.notes.R
+import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.presenter.main.MainPresenter
 import com.nnnshei.notes.ui.BaseActivity
 import com.nnnshei.notes.ui.note.NoteActivity
-import com.nnnshei.notes.ui.recycler.NoteApdapter
+import com.nnnshei.notes.ui.recycler.NoteAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
 class MainActivity : BaseActivity(), MainView {
+
     override val layout = R.layout.activity_main
 
     @InjectPresenter
@@ -19,6 +21,10 @@ class MainActivity : BaseActivity(), MainView {
 
     @ProvidePresenter
     fun providePresenter() = MainPresenter(NoteApplication.getDatabase().noteDao())
+
+    private val adapter = NoteAdapter {
+        presenter.onLoadNoteClicked(it.id)
+    }
 
     override fun init() {
         makeToast("MainActivity")
@@ -36,5 +42,9 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun onNoteLoad() {
         startActivity(Intent(this, NoteActivity::class.java))
+    }
+
+    override fun loadData(data: List<Note>) {
+        adapter.bindData(data)
     }
 }
