@@ -53,8 +53,4 @@ class MainActivity : BaseActivity(), MainView {
     override fun loadData(data: List<Note>) {
         adapter.bindData(data)
     }
-
-    override fun onResume(){
-        super.onResume()
-    }
 }

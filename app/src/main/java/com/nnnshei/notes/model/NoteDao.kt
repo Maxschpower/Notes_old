@@ -1,10 +1,17 @@
+package com.nnnshei.notes.model
+
 import androidx.room.*
+import io.reactivex.Flowable
+import io.reactivex.Observable
 import io.reactivex.Single
 
 @Dao
 interface NoteDao {
     @Query("SELECT * FROM note")
     fun getAll(): Single<List<Note>>
+
+    @Query("SELECT * FROM note")
+    fun observeAll(): Flowable<List<Note>>
 
     @Query("SELECT * FROM note WHERE id = :noteId")
     fun loadById(noteId: Int): Single<Note>

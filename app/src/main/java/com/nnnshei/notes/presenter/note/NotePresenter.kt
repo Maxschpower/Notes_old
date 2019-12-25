@@ -1,7 +1,7 @@
 package com.nnnshei.notes.presenter.note
 
-import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.model.NoteDao
+import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.presenter.BasePresenter
 import com.nnnshei.notes.ui.note.NoteView
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,31 +16,31 @@ class NotePresenter(private val dao: NoteDao) : BasePresenter<NoteView>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-        viewState.onNoteDelete()
-            },{
+                viewState.onNoteDelete()
+            }, {
                 it.printStackTrace()
             })
             .untilDestroy()
     }
 
-    fun onSaveNoteClicked(id: Int, text: String, time:Long) {
+    fun onSaveNoteClicked(id: Int, text: String, time: Long) {
         dao.update(Note(id, text, time))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 viewState.onNoteSave()
-            },{
+            }, {
                 it.printStackTrace()
             })
             .untilDestroy()
     }
 
-    fun onLoadNote(id: Int){
+    fun onLoadNote(id: Int) {
         dao.loadById(id)
             .subscribeOn(Schedulers.io())
             .subscribe({
                 viewState.onNoteLoad(it)
-            },{
+            }, {
                 it.printStackTrace()
             })
             .untilDestroy()

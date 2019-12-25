@@ -1,6 +1,5 @@
 package com.nnnshei.notes.presenter.main
 
-import android.content.Intent
 import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.model.NoteDao
 import com.nnnshei.notes.presenter.BasePresenter
@@ -12,8 +11,9 @@ import moxy.InjectViewState
 @InjectViewState
 class MainPresenter(private val dao: NoteDao) : BasePresenter<MainView>() {
 
-    init {
-        dao.getAll()
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        dao.observeAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

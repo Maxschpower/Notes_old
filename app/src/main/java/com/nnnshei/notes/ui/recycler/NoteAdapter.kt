@@ -45,13 +45,15 @@ class NoteAdapter(
         private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
 
         fun bind(note: Note) {
-            containerView.setOnClickListener {
-                clickListener(note)
+            containerView.apply {
+                setOnClickListener {
+                    clickListener(note)
+                }
+                textItemNote.text = note.text
+                dataNote.text = "${yearFormat.format(note.time)}" +
+                        "\n" +
+                        "${timeFormat.format(note.time)}"
             }
-            containerView.textItemNote.text = note.text
-            containerView.dataNote.text = "${yearFormat.format(note.time)}" +
-                    "\n" +
-                    "${timeFormat.format(note.time)}"
         }
     }
 }
