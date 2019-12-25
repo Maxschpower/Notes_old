@@ -1,5 +1,6 @@
 package com.nnnshei.notes.presenter.main
 
+import android.content.Intent
 import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.model.NoteDao
 import com.nnnshei.notes.presenter.BasePresenter
@@ -34,14 +35,5 @@ class MainPresenter(private val dao: NoteDao) : BasePresenter<MainView>() {
             .untilDestroy()
     }
 
-    fun onLoadNoteClicked(id: Int) {
-        dao.loadById(id)
-            .subscribeOn(Schedulers.io())
-            .subscribe({
-                viewState.onNoteLoad()
-            }, {
-                it.printStackTrace()
-            })
-            .untilDestroy()
-    }
+
 }

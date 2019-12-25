@@ -1,5 +1,3 @@
-package com.nnnshei.notes.model
-
 import androidx.room.*
 import io.reactivex.Single
 
@@ -15,7 +13,7 @@ interface NoteDao {
     fun insert(note: Note): Single<Unit>
 
     @Query ("DELETE FROM note WHERE id=:noteId")
-    fun delete(noteId: Int)
+    fun delete(noteId: Int): Single<Unit>
 
     @Update
     fun update(note: Note): Single<Unit>

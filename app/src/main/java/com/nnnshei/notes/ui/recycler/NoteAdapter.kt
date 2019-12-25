@@ -8,6 +8,8 @@ import com.nnnshei.notes.R
 import com.nnnshei.notes.model.Note
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_note.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NoteAdapter(
     private val clickListener: (Note) -> Unit
@@ -39,11 +41,17 @@ class NoteAdapter(
         private val clickListener: (Note) -> Unit
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
+        private val yearFormat = SimpleDateFormat("d.MM.yyyy", Locale.getDefault())
+        private val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+
         fun bind(note: Note) {
             containerView.setOnClickListener {
                 clickListener(note)
             }
             containerView.textItemNote.text = note.text
+            containerView.dataNote.text = "${yearFormat.format(note.time)}" +
+                    "\n" +
+                    "${timeFormat.format(note.time)}"
         }
     }
 }

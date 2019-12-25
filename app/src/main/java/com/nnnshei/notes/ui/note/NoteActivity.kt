@@ -3,6 +3,7 @@ package com.nnnshei.notes.ui.note
 import android.content.Intent
 import com.nnnshei.notes.NoteApplication
 import com.nnnshei.notes.R
+import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.presenter.note.NotePresenter
 import com.nnnshei.notes.ui.BaseActivity
 import com.nnnshei.notes.ui.main.MainActivity
@@ -19,25 +20,34 @@ class NoteActivity : BaseActivity(), NoteView {
     @ProvidePresenter
     fun providePresenter() = NotePresenter(NoteApplication.getDatabase().noteDao())
 
+    private val id by lazy {
+        intent.getIntExtra("ID", -1)
+    }
+
     override fun init() {
-        makeToast("NoteActivity")
+        makeToast("NoteActivity id:${id}")
+        presenter.onLoadNote(id)
         btnBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
         btnDelete.setOnClickListener {
-            //            presenter.onDeleteNoteClicked()
+            presenter.onDeleteNoteClicked(id)
         }
         btnSave.setOnClickListener {
-            presenter.onSaveNoteClicked(0,textNote.text.toString(), System.currentTimeMillis())
+            presenter.onSaveNoteClicked(id, textNote.text.toString(), System.currentTimeMillis())
         }
     }
 
     override fun onNoteDelete() {
-        makeToast("Заметка удалена")
         startActivity(Intent(this, MainActivity::class.java))
+        makeToast("Заметка удалена")
     }
 
     override fun onNoteSave() {
         makeToast("Заметка сохранена")
+    }
+
+    override fun onNoteLoad(note: Note) {
+        textNote.setText(note.text)
     }
 }

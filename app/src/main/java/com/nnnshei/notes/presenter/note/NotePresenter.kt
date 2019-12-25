@@ -13,7 +13,14 @@ class NotePresenter(private val dao: NoteDao) : BasePresenter<NoteView>() {
 
     fun onDeleteNoteClicked(id: Int) {
         dao.delete(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
         viewState.onNoteDelete()
+            },{
+                it.printStackTrace()
+            })
+            .untilDestroy()
     }
 
     fun onSaveNoteClicked(id: Int, text: String, time:Long) {
@@ -22,6 +29,17 @@ class NotePresenter(private val dao: NoteDao) : BasePresenter<NoteView>() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 viewState.onNoteSave()
+            },{
+                it.printStackTrace()
+            })
+            .untilDestroy()
+    }
+
+    fun onLoadNote(id: Int){
+        dao.loadById(id)
+            .subscribeOn(Schedulers.io())
+            .subscribe({
+                viewState.onNoteLoad(it)
             },{
                 it.printStackTrace()
             })

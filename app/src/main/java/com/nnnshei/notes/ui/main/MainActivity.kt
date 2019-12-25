@@ -1,6 +1,8 @@
 package com.nnnshei.notes.ui.main
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nnnshei.notes.NoteApplication
 import com.nnnshei.notes.R
 import com.nnnshei.notes.model.Note
@@ -23,16 +25,18 @@ class MainActivity : BaseActivity(), MainView {
     fun providePresenter() = MainPresenter(NoteApplication.getDatabase().noteDao())
 
     private val adapter = NoteAdapter {
-        presenter.onLoadNoteClicked(it.id)
+        onNoteLoad(it.id)
     }
 
     override fun init() {
-        makeToast("MainActivity")
+        requestedOrientation =(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        rec.layoutManager = LinearLayoutManager(this)
+        rec.adapter = adapter
         btnNew.setOnClickListener {
             presenter.onCreateNoteClicked()
         }
         btnLoad.setOnClickListener {
-            presenter.onLoadNoteClicked(noteFind.text.toString().toInt())
+            onNoteLoad(noteFind.text.toString().toInt())
         }
     }
 
@@ -40,11 +44,17 @@ class MainActivity : BaseActivity(), MainView {
         startActivity(Intent(this, NoteActivity::class.java))
     }
 
-    override fun onNoteLoad() {
-        startActivity(Intent(this, NoteActivity::class.java))
+    override fun onNoteLoad(id: Int) {
+        val intent = Intent(this, NoteActivity::class.java)
+        intent.putExtra("ID", id)
+        startActivity(intent)
     }
 
     override fun loadData(data: List<Note>) {
         adapter.bindData(data)
+    }
+
+    override fun onResume(){
+        super.onResume()
     }
 }
