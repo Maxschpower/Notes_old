@@ -1,17 +1,16 @@
 package com.nnnshei.notes.ui.note
 
-import android.content.Intent
+import android.os.Bundle
 import com.nnnshei.notes.NoteApplication
 import com.nnnshei.notes.R
 import com.nnnshei.notes.model.Note
 import com.nnnshei.notes.presenter.note.NotePresenter
-import com.nnnshei.notes.ui.BaseActivity
-import com.nnnshei.notes.ui.main.MainActivity
+import com.nnnshei.notes.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_note.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class NoteActivity : BaseActivity(), NoteView {
+class NoteFragment : BaseFragment(), NoteView {
     override val layout = R.layout.fragment_note
 
     @InjectPresenter
@@ -20,26 +19,41 @@ class NoteActivity : BaseActivity(), NoteView {
     @ProvidePresenter
     fun providePresenter() = NotePresenter(NoteApplication.getDatabase().noteDao())
 
+    companion object {
+        private const val EXTRA_KEY = "ID"
+
+        fun newInstance(id: Int) = NoteFragment().apply {
+            arguments = Bundle().apply {
+                putInt(EXTRA_KEY, id)
+            }
+        }
+    }
+
     private val id by lazy {
-        intent.getIntExtra(MainActivity.EXTRA_KEY, -1)
+        arguments?.getInt(EXTRA_KEY)
     }
 
     override fun init() {
         makeToast("NoteActivity id:${id}")
-        presenter.onLoadNote(id)
+        id?.let { presenter.onLoadNote(it) }
         btnBack.setOnClickListener {
-            finish()
+            presenter.onBackClicked()
         }
         btnDelete.setOnClickListener {
-            presenter.onDeleteNoteClicked(id)
+            id?.let { it1 -> presenter.onDeleteNoteClicked(it1) }
         }
         btnSave.setOnClickListener {
-            presenter.onSaveNoteClicked(id, textNote.text.toString(), System.currentTimeMillis())
+            id?.let { it1 ->
+                presenter.onSaveNoteClicked(
+                    it1,
+                    textNote.text.toString(),
+                    System.currentTimeMillis()
+                )
+            }
         }
     }
 
     override fun onNoteDelete() {
-        finish()
         makeToast("Заметка удалена")
     }
 

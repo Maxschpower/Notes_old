@@ -1,7 +1,7 @@
 package com.nnnshei.notes.presenter.note
 
-import com.nnnshei.notes.model.NoteDao
 import com.nnnshei.notes.model.Note
+import com.nnnshei.notes.model.NoteDao
 import com.nnnshei.notes.presenter.BasePresenter
 import com.nnnshei.notes.ui.note.NoteView
 import io.reactivex.android.schedulers.AndroidSchedulers

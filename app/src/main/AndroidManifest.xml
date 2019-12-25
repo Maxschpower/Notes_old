@@ -13,8 +13,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.BaseActivity" />
-        <activity android:name=".ui.note.NoteActivity" />
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.note.NoteFragment" />
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

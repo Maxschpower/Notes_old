@@ -57,4 +57,7 @@ dependencies {
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    def cicerone = "5.0.0"
+    implementation "ru.terrakok.cicerone:cicerone:$cicerone"
 }
