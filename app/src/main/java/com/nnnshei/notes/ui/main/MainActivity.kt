@@ -28,15 +28,19 @@ class MainActivity : BaseActivity(), MainView {
         onNoteLoad(it.id)
     }
 
+    companion object {
+        const val EXTRA_KEY = "ID"
+    }
+
     override fun init() {
-        requestedOrientation =(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
         rec.layoutManager = LinearLayoutManager(this)
         rec.adapter = adapter
         btnNew.setOnClickListener {
             presenter.onCreateNoteClicked()
         }
         btnLoad.setOnClickListener {
-            onNoteLoad(noteFind.text.toString().toInt())
+            noteFind.text.toString().toIntOrNull()?.let(::onNoteLoad)
         }
     }
 
@@ -46,7 +50,7 @@ class MainActivity : BaseActivity(), MainView {
 
     override fun onNoteLoad(id: Int) {
         val intent = Intent(this, NoteActivity::class.java)
-        intent.putExtra("ID", id)
+        intent.putExtra(EXTRA_KEY, id)
         startActivity(intent)
     }
 

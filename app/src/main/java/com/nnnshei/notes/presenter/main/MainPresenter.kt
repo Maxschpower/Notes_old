@@ -16,11 +16,7 @@ class MainPresenter(private val dao: NoteDao) : BasePresenter<MainView>() {
         dao.observeAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                viewState.loadData(it)
-            }, {
-                it.printStackTrace()
-            })
+            .subscribe(viewState::loadData,Throwable::printStackTrace)
             .untilDestroy()
     }
 
@@ -34,6 +30,4 @@ class MainPresenter(private val dao: NoteDao) : BasePresenter<MainView>() {
             })
             .untilDestroy()
     }
-
-
 }

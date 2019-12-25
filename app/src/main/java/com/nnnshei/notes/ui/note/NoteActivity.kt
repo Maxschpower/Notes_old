@@ -21,7 +21,7 @@ class NoteActivity : BaseActivity(), NoteView {
     fun providePresenter() = NotePresenter(NoteApplication.getDatabase().noteDao())
 
     private val id by lazy {
-        intent.getIntExtra("ID", -1)
+        intent.getIntExtra(MainActivity.EXTRA_KEY, -1)
     }
 
     override fun init() {
@@ -39,7 +39,7 @@ class NoteActivity : BaseActivity(), NoteView {
     }
 
     override fun onNoteDelete() {
-        startActivity(Intent(this, MainActivity::class.java))
+        finish()
         makeToast("Заметка удалена")
     }
 
