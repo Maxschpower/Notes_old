@@ -23,7 +23,8 @@ class NotesPresenter(private val dao: NoteDao) : BasePresenter<NotesView>() {
     }
 
     fun onNoteClicked(id: Int) {
-        NoteApplication.router.navigateTo(Screens.NoteScreen(id))
+//        NoteApplication.router.navigateTo(Screens.NoteScreen(id))
+        viewState.openNewScreen(id)
     }
 
     fun onCreateNoteClicked() {
@@ -31,7 +32,8 @@ class NotesPresenter(private val dao: NoteDao) : BasePresenter<NotesView>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                NoteApplication.router.navigateTo(Screens.NoteScreen(-1)) // Вначале не сохраняется
+                viewState.openNewScreen(-1)
+                //                NoteApplication.router.navigateTo(Screens.NoteScreen(-1))
             }, {
                 it.printStackTrace()
             })

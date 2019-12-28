@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notes.NotesFragment"
-    android:background="@color/colorBack">
+    android:background="@color/colorBack"
+    tools:context=".ui.notes.NotesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleNotes"
@@ -35,6 +35,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/bg_button_rounded"
             android:text="load"
+            android:transitionName="back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnNew"
             app:layout_constraintStart_toEndOf="@id/noteFind"
@@ -47,6 +48,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/bg_button_rounded"
             android:text="New"
+            android:transitionName="save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -19,10 +19,13 @@
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/bg_button_rounded"
             android:elevation="4dp"
             android:text="Back"
+            android:transitionName="back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,6 +48,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/bg_button_rounded"
             android:text="Save"
+            android:transitionName="save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
