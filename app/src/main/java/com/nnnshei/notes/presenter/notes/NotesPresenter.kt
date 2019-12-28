@@ -29,8 +29,9 @@ class NotesPresenter(private val dao: NoteDao) : BasePresenter<NotesView>() {
     fun onCreateNoteClicked() {
         dao.insert(Note(0, null, System.currentTimeMillis()))
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                NoteApplication.router.navigateTo(Screens.NoteScreen(-1))
+                NoteApplication.router.navigateTo(Screens.NoteScreen(-1)) // Вначале не сохраняется
             }, {
                 it.printStackTrace()
             })

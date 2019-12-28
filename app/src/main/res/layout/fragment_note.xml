@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorBack">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/titleNote"
         android:layout_width="match_parent"
@@ -20,9 +19,7 @@
             android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginStart="8dp"
+            android:layout_margin="8dp"
             android:background="@drawable/bg_button_rounded"
             android:elevation="4dp"
             android:text="Back"
@@ -58,6 +55,7 @@
         android:id="@+id/textNote"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@null"
         android:gravity="start"
         android:imeOptions="actionDone"
         android:paddingStart="16dp"

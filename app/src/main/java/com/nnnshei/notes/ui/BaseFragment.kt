@@ -13,6 +13,11 @@ abstract class BaseFragment : MvpAppCompatFragment() {
 
     abstract fun init()
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -24,4 +24,7 @@ interface NoteDao {
 
     @Update
     fun update(note: Note): Single<Unit>
+
+    @Query ("SELECT * FROM note ORDER BY id DESC LIMIT 1")
+    fun getLastNote(): Single<Note>
 }

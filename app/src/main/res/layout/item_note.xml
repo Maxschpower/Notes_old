@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorNote">
 
     <View
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textItemNote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="00:00:00 \n 01.01.1999" />
+        tools:text="01.01.1999 \n 00:00" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textItemNote"
